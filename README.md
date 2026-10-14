@@ -123,6 +123,72 @@ Verified all nine beats and scene boundaries, repeat-frame determinism, and the 
 2,700-frame H.264 render at 1920 x 1080 / 30 fps (90 seconds). Earlier composition
 checks retain their original frame hashes.
 
+## OAuth 2.0: Protocol choreography
+
+Select **OAuthFlows** for a separate three-minute, 1080p/30 fps explainer.
+Eighteen ten-second beats use persistent participant swimlanes and animated
+message badges: authorization codes are dashed tickets, PKCE proof has a key motif,
+tokens are capsules, and session cookies use their own color. Dashed message
+arrows represent browser/front-channel exchanges; solid arrows represent application
+calls. Messages appear in order, move across trust boundaries, and arrive before
+the next exchange. All animation is frame-driven.
+
+| Time | Chapter |
+| --- | --- |
+| 0:00 | OAuth roles and OIDC distinction |
+| 0:10 | Authorization code with PKCE: proof, redirects, consent, code, token exchange and API access |
+| 1:20 | Client credentials / application access without a user |
+| 1:40 | Generic lanes transform into an Azure-hosted web-app architecture |
+| 1:50 | App Service / Entra replay: redirects, callback, backend token exchange, browser session, API |
+| 2:40 | Separate Azure managed-identity workload path |
+| 2:50 | Flow selection and security takeaways |
+
+```powershell
+npm run render:oauth        # Full MP4: out\oauth-flows.mp4
+npm run render:oauth:sample # Two-second PKCE exchange animation
+npm run still:oauth         # Azure authorization request poster
+npm run verify:oauth       # Every beat/boundary, mapping and deterministic seeking
+```
+
+The authorization-code example deliberately uses a **confidential server-side
+client**. Its Azure counterpart is an **Azure App Service web app / BFF using
+app-managed OIDC and a maintained authentication library**, not a SPA or an App
+Service Easy Auth implementation guide. Client authentication and PKCE are both
+shown; PKCE is not a substitute for confidential-client authentication. Azure
+hosting alone does not select an OAuth flow. Callback/scopes/endpoints are
+illustrative placeholders, never credentials or a deployed app configuration.
+
+The web backend retains OAuth tokens; the browser receives a secure application
+session cookie. An OIDC ID token authenticates the user to the client, while an
+access token authorizes the intended resource API. The animation distinguishes
+state checks, OIDC nonce validation, API token validation and permission checks.
+Client credentials is app-only and issues neither ID nor refresh tokens.
+Managed identity is a separate workload-access option: the SDK/platform endpoint
+and Entra issuance are collapsed into a single logical handoff, and the resource
+still needs permission assignments. This is not delegated user access.
+
+This is a silent conceptual video, not a live sign-in, deployment, exhaustive grant
+catalogue, or security implementation. Device authorization, refresh exchanges,
+on-behalf-of and failure paths are not animated. Implicit/password grants are
+mentioned only as patterns to avoid for modern designs. All existing videos and
+their default commands remain unchanged. Content and message data are isolated
+in `src\oauth\story.ts`.
+
+Protocol references checked during authoring:
+
+- [Microsoft Entra authorization code + PKCE](https://learn.microsoft.com/en-us/entra/identity-platform/v2-oauth2-auth-code-flow)
+- [Microsoft Entra client credentials](https://learn.microsoft.com/en-us/entra/identity-platform/v2-oauth2-client-creds-grant-flow)
+- [ID tokens and their intended use](https://learn.microsoft.com/en-us/entra/identity-platform/id-tokens)
+- [Azure managed identities](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview)
+- [OAuth security best current practice / RFC 9700](https://www.rfc-editor.org/rfc/rfc9700.html)
+- [PKCE / RFC 7636](https://www.rfc-editor.org/rfc/rfc7636.html)
+
+Verified all eighteen beats and boundaries, generic-to-Azure label mapping, cookie
+handoffs, actual PKCE packet movement and repeat-frame determinism. The full
+5,400-frame H.264 MP4 at 1920 x 1080 / 30 fps (180 seconds) was rendered and decoded
+successfully. All four earlier compositions retain their original verification
+frame hashes.
+
 ## Windows setup
 
 Install Node.js **22.12.0 or newer** (Node 24 LTS recommended) and Git. Open PowerShell
