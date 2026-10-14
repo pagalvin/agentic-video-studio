@@ -90,6 +90,39 @@ successfully. All eight scenes and boundaries were checked, including matching
 out-of-order water-pour frames. Both existing compositions retain their original
 verification frame hashes.
 
+## RAG network-diagram explainer
+
+Select **RagFlow** for a separate 90-second, 1080p/30 fps animated architecture
+diagram. Nine ten-second beats explain preparation and runtime using a persistent
+network, color-coded moving packets, highlighted services, and a fictional chat.
+All earlier videos and default commands are unchanged.
+
+Preparation: PDF/Excel/Word -> ingestion API -> extraction/normalization/chunking ->
+embeddings API -> an index containing original chunk text, vectors and source metadata.
+Runtime: chat -> assistant -> MCP server -> retrieval API -> query embedding and
+index search -> selected evidence returned through MCP -> generation LLM -> cited answer.
+MCP is the optional tool-access layer, not the search engine. Diagram arrows show
+logical data handoffs, not necessarily separate deployed components; the ingestion
+API orchestrates preparation and storage, while the retrieval service handles search.
+
+```powershell
+npm run render:rag        # Full MP4: out\rag-flow.mp4
+npm run render:rag:sample # Runtime retrieval sample
+npm run still:rag         # Retrieval diagram poster
+npm run verify:rag        # Every beat/boundary and repeat-frame seeking checks
+```
+
+The example asks about Line 3 inspections and references explicitly fictional Word
+procedures, PDF checklists and Excel schedules. It illustrates citations without
+claiming a real inspection process. Notes cover OCR, table/header context, source
+provenance, document permissions, untrusted retrieved text and insufficient evidence.
+The video is silent with on-screen explanation; it performs no real API, MCP, LLM
+or database calls. Content/diagram data lives in `src\rag\story.ts`; SVG/React layout,
+packet motion and chat rendering live alongside it and are entirely frame-driven.
+Verified all nine beats and scene boundaries, repeat-frame determinism, and the full
+2,700-frame H.264 render at 1920 x 1080 / 30 fps (90 seconds). Earlier composition
+checks retain their original frame hashes.
+
 ## Windows setup
 
 Install Node.js **22.12.0 or newer** (Node 24 LTS recommended) and Git. Open PowerShell
