@@ -6,6 +6,27 @@ task -> inspect/plan -> edit -> test/iterate -> human gate -> reviewable PR.
 On-screen narration captions are included; no external assets, TTS, or paid services
 are required. This is an editable starter, not a fully produced narrated video.
 
+## Watch with one command
+
+With Node.js **22.12.0+** installed, run this from any PowerShell directory:
+
+```powershell
+npx --yes github:pagalvin/agentic-video-studio
+```
+
+npx downloads the package and dependencies into its cache, then the launcher opens
+Remotion Studio in your browser. Select `AgenticDevelopment` if necessary and press
+Play to watch. Keep the command window running; Ctrl+C stops the local preview.
+No repository clone, separate `npm install`, system FFmpeg, or render is required.
+The first run needs internet access and can take a few minutes. npm may download
+Puppeteer's optional Chrome during dependency installation; preview itself uses
+your normal browser.
+
+If browser auto-open fails, open the local URL printed in the command window.
+To choose a port: `npx --yes github:pagalvin/agentic-video-studio --port=3047`.
+Use `--no-open` to suppress browser opening, or `--help` for launcher usage.
+This is an interactive preview, not an already-rendered MP4 or automatic playback.
+
 ## Windows setup
 
 Install Node.js **22.12.0 or newer** (Node 24 LTS recommended) and Git. Open PowerShell
