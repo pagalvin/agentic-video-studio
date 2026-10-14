@@ -57,6 +57,39 @@ Verified the full 1,440-frame H.264 render at 1920 x 1080 / 30 fps (48 seconds),
 all seven story beats and scene boundaries, and matching repeated-frame hashes.
 The existing explainer's render verification also passes with its original frame hash.
 
+## French press coffee tutorial
+
+Select **FrenchPressCoffee** in Studio for a separate 72-second, 1080p/30 fps
+tutorial. It uses an unbranded procedural stainless-steel press inspired by the
+supplied product reference, a burr grinder, a gooseneck kettle, and a ceramic cup.
+Eight nine-second scenes cover the recipe, coarse grinding, heating/cooling water,
+adding grounds, pouring/stirring, steeping, plunging, and serving. Existing videos
+and their default commands remain intact.
+
+```powershell
+npm run render:coffee        # Full MP4: out\french-press-coffee.mp4
+npm run render:coffee:sample # Animated water-pour sample
+npm run still:coffee         # Water-pour poster
+npm run verify:coffee       # Scene/boundary and out-of-order pouring-frame checks
+```
+
+Warm lighting and procedural reflection panels give the metal its product-illustration
+appearance. The opaque press becomes an explicitly labelled cutaway during brewing.
+Water and coffee use frame-driven curved streams, impact droplets/ripples and matching
+fill levels, not physical fluid simulation. Steam and grinding particles are also
+procedural and deterministic. Models are illustrative rather than manufacturer-accurate;
+no image/model assets, external fonts, audio, or paid services are downloaded.
+
+The recipe is a starting point: 30 g coarse coffee, 500 g water at 93–96°C, roughly
+four minutes of steeping, then a gentle plunge and decant. The steeping timer is
+explicitly time-compressed. Hot-water caution and guidance not to force a resistant
+plunger are included. Adjust the recipe to taste. The tutorial is silent with text
+instructions; it does not simulate real heating or brewing times.
+The full 2,160-frame H.264 video was rendered at 1920 x 1080 / 30 fps and decoded
+successfully. All eight scenes and boundaries were checked, including matching
+out-of-order water-pour frames. Both existing compositions retain their original
+verification frame hashes.
+
 ## Windows setup
 
 Install Node.js **22.12.0 or newer** (Node 24 LTS recommended) and Git. Open PowerShell
