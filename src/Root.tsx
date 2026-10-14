@@ -5,6 +5,8 @@ import {ManufacturingPillars} from './pillars/ManufacturingPillars';
 import {PILLARS_DURATION, PILLARS_FPS} from './pillars/content';
 import {FrenchPressCoffee} from './coffee/FrenchPressCoffee';
 import {COFFEE_DURATION, COFFEE_FPS} from './coffee/recipe';
+import {RagFlow} from './rag/RagFlow';
+import {RAG_DURATION, RAG_FPS} from './rag/story';
 
 export const VideoRoot = () => (
   <>
@@ -29,6 +31,14 @@ export const VideoRoot = () => (
       component={FrenchPressCoffee}
       durationInFrames={COFFEE_DURATION}
       fps={COFFEE_FPS}
+      width={1920}
+      height={1080}
+    />
+    <Composition
+      id="RagFlow"
+      component={RagFlow}
+      durationInFrames={RAG_DURATION}
+      fps={RAG_FPS}
       width={1920}
       height={1080}
     />

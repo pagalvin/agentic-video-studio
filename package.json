@@ -33,6 +33,10 @@
     "render:coffee:sample": "remotion render src/index.ts FrenchPressCoffee out/french-press-coffee-sample.mp4 --frames=1170-1199 --scale=0.5 --concurrency=1",
     "still:coffee": "remotion still src/index.ts FrenchPressCoffee out/french-press-coffee.png --frame=1215",
     "verify:coffee": "node scripts/verify-coffee.mjs",
+    "render:rag": "remotion render src/index.ts RagFlow out/rag-flow.mp4",
+    "render:rag:sample": "remotion render src/index.ts RagFlow out/rag-flow-sample.mp4 --frames=1560-1589 --scale=0.5 --concurrency=1",
+    "still:rag": "remotion still src/index.ts RagFlow out/rag-flow.png --frame=1650",
+    "verify:rag": "node scripts/verify-rag.mjs",
     "browser:install": "puppeteer browsers install chrome",
     "browser:check": "node scripts/browser-check.mjs"
   },
