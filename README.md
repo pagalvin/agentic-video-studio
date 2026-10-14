@@ -27,6 +27,36 @@ To choose a port: `npx --yes github:pagalvin/agentic-video-studio --port=3047`.
 Use `--no-open` to suppress browser opening, or `--help` for launcher usage.
 This is an interactive preview, not an already-rendered MP4 or automatic playback.
 
+## Manufacturing AI: Five connected pillars
+
+A separate **ManufacturingPillars** composition reimagines the supplied manufacturing
+AI capability slide as a 48-second motion-graphics video. It keeps the slide's five
+pillars and supporting guidance: Educate, Assess, Govern, Decide, and Deliver & evolve.
+An opening reveal, five seven-second spotlight scenes, and a closing overview combine
+kinetic typography, color-coded navigation, light sweeps, procedural particles, and
+a connected 3D pillar network. The closing emphasizes continuous evolution within
+governed parameters. This video is silent, with readable on-screen text.
+
+Run `npm run studio` (or the npx launcher), then select **ManufacturingPillars** in
+the composition list. The original **AgenticDevelopment** video, default render
+commands, and content are unchanged.
+
+```powershell
+npm run render:pillars        # Full 48-second 1080p MP4: out\manufacturing-pillars.mp4
+npm run render:pillars:sample # One-second preview of the Educate reveal
+npm run still:pillars         # Decide spotlight poster
+npm run verify:pillars        # All beats/boundaries and repeat-frame determinism
+```
+
+New content is isolated in `src\pillars\content.ts`; text/colors can be edited there.
+The layout, 3D scene, and effects live alongside it. All motion is derived from the
+video frame, including particle locations, light sweeps, spring entrances, and
+network motion. No downloaded imagery, fonts, models, or runtime LLM calls are used.
+The slide was used as a content reference, not embedded as a static screenshot.
+Verified the full 1,440-frame H.264 render at 1920 x 1080 / 30 fps (48 seconds),
+all seven story beats and scene boundaries, and matching repeated-frame hashes.
+The existing explainer's render verification also passes with its original frame hash.
+
 ## Windows setup
 
 Install Node.js **22.12.0 or newer** (Node 24 LTS recommended) and Git. Open PowerShell

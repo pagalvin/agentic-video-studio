@@ -24,7 +24,11 @@
     "render": "remotion render src/index.ts AgenticDevelopment out/agentic-development.mp4",
     "render:sample": "remotion render src/index.ts AgenticDevelopment out/sample.mp4 --frames=0-29 --scale=0.5 --concurrency=1",
     "still": "remotion still src/index.ts AgenticDevelopment out/poster.png --frame=450",
+    "render:pillars": "remotion render src/index.ts ManufacturingPillars out/manufacturing-pillars.mp4",
+    "render:pillars:sample": "remotion render src/index.ts ManufacturingPillars out/manufacturing-pillars-sample.mp4 --frames=180-209 --scale=0.5 --concurrency=1",
+    "still:pillars": "remotion still src/index.ts ManufacturingPillars out/manufacturing-pillars.png --frame=960",
     "verify:render": "node scripts/verify-render.mjs",
+    "verify:pillars": "node scripts/verify-pillars.mjs",
     "browser:install": "puppeteer browsers install chrome",
     "browser:check": "node scripts/browser-check.mjs"
   },
