@@ -29,6 +29,10 @@
     "still:pillars": "remotion still src/index.ts ManufacturingPillars out/manufacturing-pillars.png --frame=960",
     "verify:render": "node scripts/verify-render.mjs",
     "verify:pillars": "node scripts/verify-pillars.mjs",
+    "render:coffee": "remotion render src/index.ts FrenchPressCoffee out/french-press-coffee.mp4",
+    "render:coffee:sample": "remotion render src/index.ts FrenchPressCoffee out/french-press-coffee-sample.mp4 --frames=1170-1199 --scale=0.5 --concurrency=1",
+    "still:coffee": "remotion still src/index.ts FrenchPressCoffee out/french-press-coffee.png --frame=1215",
+    "verify:coffee": "node scripts/verify-coffee.mjs",
     "browser:install": "puppeteer browsers install chrome",
     "browser:check": "node scripts/browser-check.mjs"
   },
