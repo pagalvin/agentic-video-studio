@@ -1,0 +1,41 @@
+{
+  "name": "agentic-video-studio",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Deterministic, code-generated technical explainers with Remotion and Three.js",
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "render": "remotion render src/index.ts AgenticDevelopment out/agentic-development.mp4",
+    "render:sample": "remotion render src/index.ts AgenticDevelopment out/sample.mp4 --frames=0-29 --scale=0.5 --concurrency=1",
+    "still": "remotion still src/index.ts AgenticDevelopment out/poster.png --frame=450",
+    "verify:render": "node scripts/verify-render.mjs",
+    "browser:install": "puppeteer browsers install chrome",
+    "browser:check": "node scripts/browser-check.mjs"
+  },
+  "dependencies": {
+    "@react-three/drei": "10.7.8",
+    "@react-three/fiber": "9.7.0",
+    "@remotion/bundler": "4.0.521",
+    "@remotion/cli": "4.0.521",
+    "@remotion/renderer": "4.0.521",
+    "@remotion/three": "4.0.521",
+    "gsap": "3.15.0",
+    "puppeteer": "25.10.0",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "remotion": "4.0.521",
+    "three": "0.180.0"
+  },
+  "devDependencies": {
+    "@types/node": "24.19.2",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@types/three": "0.180.0",
+    "typescript": "5.9.3"
+  }
+}
