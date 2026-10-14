@@ -1,9 +1,20 @@
 {
   "name": "agentic-video-studio",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "Deterministic, code-generated technical explainers with Remotion and Three.js",
   "type": "module",
+  "bin": {
+    "agentic-video-studio": "bin/agentic-video-studio.mjs"
+  },
+  "files": [
+    "bin",
+    "scripts",
+    "src",
+    "remotion.config.ts",
+    "tsconfig.json",
+    "README.md"
+  ],
   "engines": {
     "node": ">=22.12.0"
   },
