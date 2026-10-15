@@ -59,6 +59,9 @@
     "verify:azure-fees": "node scripts/verify-azure-fees.mjs",
     "audio:azure-fees": "node scripts/generate-conversation-audio.mjs --azure-fees",
     "render:azure-fees:narrated": "remotion render src/index.ts AzureFeeArchitectureNarrated out/azure-fee-architecture-narrated.mp4",
+    "render:iassist": "remotion render src/index.ts IAssist out/iassist-business-video.mp4",
+    "audio:iassist": "node scripts/generate-conversation-audio.mjs --iassist",
+    "verify:iassist": "node scripts/verify-iassist.mjs",
     "browser:install": "puppeteer browsers install chrome",
     "browser:check": "node scripts/browser-check.mjs"
   },

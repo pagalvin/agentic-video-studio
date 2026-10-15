@@ -7,8 +7,9 @@ import ts from 'typescript';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const azureFees = process.argv.includes('--azure-fees');
-const fees = azureFees || process.argv.includes('--fees');
-const kind = azureFees ? 'azureFees' : fees ? 'fees' : 'conversation';
+const iassist = process.argv.includes('--iassist');
+const fees = azureFees || iassist || process.argv.includes('--fees');
+const kind = iassist ? 'iassist' : azureFees ? 'azureFees' : fees ? 'fees' : 'conversation';
 try {
   loadEnvFile(path.join(root, '.env'));
 } catch (error) {
@@ -32,7 +33,7 @@ const voices = fees ? {Narrator: required('SPEECH_VOICE')} : {Milo: required('SP
 const source = await readFile(path.join(root, 'src', kind, fees ? 'script.ts' : 'lines.ts'), 'utf8');
 const compiled = ts.transpileModule(source, {compilerOptions: {module: ts.ModuleKind.ESNext}});
 const content = await import(`data:text/javascript;base64,${Buffer.from(compiled.outputText).toString('base64')}`);
-const conversationLines = fees ? content.feeScript.map((text) => ({text, speaker: 'Narrator'})) : content.conversationLines;
+const conversationLines = fees ? (content.iassistScript ?? content.feeScript).map((text) => ({text, speaker: 'Narrator'})) : content.conversationLines;
 const output = path.join(root, 'public', 'audio', kind);
 await mkdir(output, {recursive: true});
 const escapeXml = (text) => text.replace(/[<>&"']/g, (char) => ({'<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;', "'": '&apos;'}[char]));
