@@ -208,6 +208,35 @@ The scene uses stylized procedural geometry, not downloaded rigged models or
 photorealistic humans. Mouth motion suggests speech rather than audio lip-sync.
 The tutorial videos and their default render commands are unchanged.
 
+## Sprint demo visibility iceberg
+
+Select **SprintDemoIceberg** for an 84-second silent explainer about why sprint
+demos matter to people with different levels of daily project visibility.
+A dimensional, faceted vector iceberg starts close on the implementation team
+and its business partners, then pulls back to reveal four stakeholder groups:
+executive leadership / steering committee, PMO, business sponsor, and consulting
+leadership. Each group gets a spotlight explaining its role, questions and needs.
+
+The demo becomes a shared window: business purpose, working evidence, honest gaps,
+and explicit feedback/decision requests. Animated paths carry context outward and
+feedback, decisions and support back to the team. The closing message preserves
+celebration while making value and next actions visible. The metaphor represents
+**visibility, not hierarchy, importance or headcount**; urgent issues must not wait
+for a demo, and other communication channels remain necessary.
+
+```powershell
+npm run render:iceberg # Full 1080p MP4: out\sprint-demo-iceberg.mp4
+npm run still:iceberg  # Shared-window poster
+npm run verify:iceberg # Every beat/boundary, two-way motion and deterministic seeking
+```
+
+Edit stakeholder needs and scene text in `src\iceberg\story.ts`. All animation,
+including the pullback, waves and flowing paths, derives from the current frame.
+There is no audio, external artwork, downloaded model or new dependency.
+Existing compositions and their default render commands remain unchanged.
+The verification script uses the bundled Windows FFmpeg, or `ffmpeg` on PATH on
+other platforms, to compare cropped diagram images independently of the progress bar.
+
 ## Windows setup
 
 Install Node.js **22.12.0 or newer** (Node 24 LTS recommended) and Git. Open PowerShell
