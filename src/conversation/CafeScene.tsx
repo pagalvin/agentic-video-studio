@@ -59,7 +59,17 @@ const Character = ({name, x}: {name: 'Milo' | 'June'; x: number}) => {
           <Ball position={[-0.57, 0, 0]} scale={[0.11, 0.17, 0.1]} color={skin} />
           <Ball position={[0.57, 0, 0]} scale={[0.11, 0.17, 0.1]} color={skin} />
           <Ball position={[0, 0.35, -0.12]} scale={[0.6, 0.42, 0.48]} color={name === 'Milo' ? '#573c2c' : '#252b35'} />
-          {name === 'June' && <Ball position={[0.38, 0.13, -0.42]} scale={[0.28, 0.4, 0.24]} color="#252b35" />}
+          {name === 'June' && (
+            <group>
+              <Ball position={[0, -0.16, -0.36]} scale={[0.65, 0.89, 0.32]} color="#252b35" />
+              {[-1, 1].map((side) => (
+                <group key={side}>
+                  <Ball position={[side * 0.55, -0.18, -0.02]} scale={[0.2, 0.79, 0.28]} color="#252b35" />
+                  <Stroke points={[[side * 0.6, 0.22, 0.1], [side * 0.65, -0.3, 0.13], [side * 0.56, -0.8, 0.12]]} radius={0.018} color="#424958" />
+                </group>
+              ))}
+            </group>
+          )}
           {[-1, 1].map((side) => (
             <group key={side}>
               <Ball position={[side * 0.21, 0.08, 0.47]} scale={[0.13, eyeHeight, 0.055]} color="#fff3df" />
