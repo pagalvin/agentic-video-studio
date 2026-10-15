@@ -2,24 +2,26 @@ import {AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig} from
 import {FEE_BEAT_FRAMES, FEE_DURATION, evidenceLabels, feeBeats, roles} from './story';
 
 const clamp = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
-export const FeeOperations = () => {
+export const FeeOperations = ({scene, subtitle}: {scene?: {beat: number; local: number; duration: number}; subtitle?: string} = {}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
-  const beat = Math.min(Math.floor(frame / FEE_BEAT_FRAMES), feeBeats.length - 1);
-  const local = frame % FEE_BEAT_FRAMES;
+  const beat = scene?.beat ?? Math.min(Math.floor(frame / FEE_BEAT_FRAMES), feeBeats.length - 1);
+  const local = scene?.local ?? frame % FEE_BEAT_FRAMES;
+  const duration = scene?.duration ?? FEE_BEAT_FRAMES;
+  const visualLocal = local / duration * FEE_BEAT_FRAMES;
   const content = feeBeats[beat];
   const color = roles[content.owner].color;
   const reveal = spring({frame: local, fps, config: {damping: 200}});
-  const opacity = interpolate(local, [0, 14, 284, 299], [0, 1, 1, 0], clamp);
+  const opacity = interpolate(local, [0, 14, duration - 16, duration - 1], [0, 1, 1, 0], clamp);
   const exception = [1, 5, 8].includes(beat);
-  const confirmed = beat === 11 || beat === 10 && local >= 170;
+  const confirmed = beat === 11 || beat === 10 && visualLocal >= 170;
   const evidence = beat === 10 && !confirmed ? 5 : content.evidence;
-  const status = confirmed ? 'Confirmed / response recorded' : beat === 10 && local < 65 ? 'Approved / packaging' : content.status;
+  const status = confirmed ? 'Confirmed / response recorded' : beat === 10 && visualLocal < 65 ? 'Approved / packaging' : content.status;
   const priorOwner = feeBeats[Math.max(0, beat - 1)].owner;
   const packetY = interpolate(local, [0, 65], [320 + priorOwner * 125, 320 + content.owner * 125], clamp);
   return <AbsoluteFill style={{background: '#091725', color: '#edf7ff', fontFamily: 'Arial, sans-serif'}}>
     <AbsoluteFill style={{backgroundImage: 'radial-gradient(#4d738540 1px, transparent 1px)', backgroundSize: '32px 32px'}} />
-    <div style={{position: 'absolute', left: 65, right: 65, top: 35, display: 'flex', justifyContent: 'space-between', fontSize: 19, letterSpacing: 3, color}}><span>{content.phase}</span><span>MANAGEMENT FEE OPERATIONS / SILENT FIRST PASS</span></div>
+    <div style={{position: 'absolute', left: 65, right: 65, top: 35, display: 'flex', justifyContent: 'space-between', fontSize: 19, letterSpacing: 3, color}}><span>{content.phase}</span><span>MANAGEMENT FEE OPERATIONS / {scene ? 'NARRATED' : 'SILENT FIRST PASS'}</span></div>
     <div style={{position: 'absolute', left: 65, top: 88, fontSize: 49, fontWeight: 800, opacity, transform: `translateY(${(1 - reveal) * 18}px)`}}>{content.title}</div>
     <div style={{position: 'absolute', left: 65, top: 178, right: 65, background: '#163044', borderRadius: 12, padding: '15px 22px', display: 'flex', justifyContent: 'space-between', fontSize: 21}}>
       <span style={{color: '#f2cc8a'}}>OPERATIONS LEADERSHIP / OVERSIGHT</span>
@@ -59,10 +61,10 @@ export const FeeOperations = () => {
       <div style={{marginTop: 16, fontSize: 18, color: '#c3a7ff'}}>{beat === 8 ? 'RETURN → revise → resubmit → review' : beat === 10 ? 'REJECTION → resolve → controlled resubmission' : beat === 2 ? 'RULE CHANGE → separate author / approve gate' : 'Sources and evidence remain linked to the result.'}</div>
     </div>
     <div style={{position: 'absolute', left: 65, right: 65, top: 910, opacity}}>
-      <div style={{fontSize: 28, lineHeight: 1.4}}>{content.caption}</div>
-      <div style={{fontSize: 22, lineHeight: 1.4, color: '#a8c4d6', borderLeft: `3px solid ${color}`, paddingLeft: 17, marginTop: 16}}>{content.note}</div>
+      <div style={{fontSize: 28, lineHeight: 1.4}}>{subtitle ?? content.caption}</div>
+      {!scene && <div style={{fontSize: 22, lineHeight: 1.4, color: '#a8c4d6', borderLeft: `3px solid ${color}`, paddingLeft: 17, marginTop: 16}}>{content.note}</div>}
     </div>
     <div style={{position: 'absolute', bottom: 23, left: 65, right: 65, display: 'flex', justifyContent: 'space-between', fontSize: 16, letterSpacing: 2, color: '#89a8bb'}}><span>DETERMINISTIC FEES / HUMAN CONTROL / AUDITABLE EVIDENCE</span><span>{String(beat + 1).padStart(2, '0')} / 12</span></div>
-    <div style={{position: 'absolute', bottom: 0, height: 4, background: color, width: `${frame / (FEE_DURATION - 1) * 100}%`}} />
+    <div style={{position: 'absolute', bottom: 0, height: 4, background: color, width: `${(scene ? (beat + local / duration) / feeBeats.length : frame / (FEE_DURATION - 1)) * 100}%`}} />
   </AbsoluteFill>;
 };

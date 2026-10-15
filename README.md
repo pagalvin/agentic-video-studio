@@ -340,6 +340,31 @@ controlled exceptions and traceable results. Edit text and ownership in
 `src\fees\story.ts`. No audio, Azure calls or external assets are used. Existing
 videos remain separate.
 
+### Narrated fee operations
+
+Select **FeeOperationsNarrated** for the same story with a single Azure narrator
+and sentence-level captions. The original **FeeOperations** stays silent.
+The 12-scene script is in `src\fees\script.ts`; scene lengths follow the measured
+recordings with entrance and reading pauses. Captions advance at estimated
+sentence boundaries based on word counts, not speech-recognition word alignment.
+Secondary explanatory text is hidden in the narrated version to reduce competing
+reading. The full script remains available in source.
+
+```powershell
+npm run audio:fees          # Explicit Azure generation, using SPEECH_VOICE
+npm run verify:fees         # Silent and narrated beats, boundaries and assets
+npm run render:fees:narrated # out\fee-operations-narrated.mp4
+```
+
+Approved audio and timing metadata are bundled for credential-free previews and
+renders. Generation uses the existing ignored `.env`, caches each scene, stops on
+errors and checks for stale script text. Azure receives the narration text and
+selected voice; generation consumes Speech quota. Requests are spaced for the
+free-tier rate limit. No Azure calls occur during rendering. The shared generator
+also retains the existing `audio:conversation` command; Dragon voice variants omit
+the unsupported speaking-rate wrapper. Review voice quality and pronunciation
+before release.
+
 ## Windows setup
 
 Install Node.js **22.12.0 or newer** (Node 24 LTS recommended) and Git. Open PowerShell
