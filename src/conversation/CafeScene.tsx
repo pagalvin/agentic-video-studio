@@ -20,7 +20,7 @@ const Character = ({name, x}: {name: 'Milo' | 'June'; x: number}) => {
   const frame = useCurrentFrame();
   const beat = getDialogue(frame);
   const local = frame - beat.start;
-  const speaking = beat.speaker === name;
+  const speaking = beat.speaker === name && frame >= beat.audioStart && frame < beat.audioEnd;
   const direction = name === 'Milo' ? 1 : -1;
   const reaction = interpolate(local, [0, 25, 55], [0, 0, 1], clamp);
   const deadpan = name === 'June' && beat.mood === 'deadpan';
@@ -32,8 +32,8 @@ const Character = ({name, x}: {name: 'Milo' | 'June'; x: number}) => {
   const eyeHeight = (deadpan ? 0.055 : surprised ? 0.14 : 0.1) * blink;
   const skin = name === 'Milo' ? '#dca27b' : '#a9694e';
   const shirt = name === 'Milo' ? '#52a9a2' : '#dc9471';
-  const mouthOpen = speaking && local < beat.end - beat.start - 18
-    ? Math.max(0, Math.sin(local / 4)) * 0.038 : laughing ? 0.045 : 0;
+  const energy = beat.clip?.envelope[frame - beat.audioStart] ?? 0;
+  const mouthOpen = speaking ? energy * 0.065 : laughing ? 0.025 : 0;
   const lean = speaking ? Math.sin(local / 12) * 0.018 : Math.sin(frame / 45) * 0.01;
 
   return (

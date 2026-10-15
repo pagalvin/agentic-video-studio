@@ -191,7 +191,7 @@ frame hashes.
 
 ## Cafe conversation
 
-Select **CafeConversation** for a silent 28-second cartoon coffee break between
+Select **CafeConversation** for a voiced, approximately 22-second cartoon coffee break between
 Milo and June. Two procedural 3D characters exchange a scarecrow joke across a
 table using animated speech bubbles. The speaker gestures and makes restrained
 mouth/head movements; the listener looks toward the speaker, raises eyebrows,
@@ -203,10 +203,47 @@ npm run render:conversation # Full 1080p MP4: out\cafe-conversation.mp4
 npm run verify:conversation # Dialogue boundaries, gesture movement, repeat-frame checks
 ```
 
-Dialogue, speakers and beat timing live in `src\conversation\dialogue.ts`.
+Dialogue and speakers live in `src\conversation\lines.ts`; `dialogue.ts` derives
+scene timing from the generated audio duration with entrance and reaction pauses.
 The scene uses stylized procedural geometry, not downloaded rigged models or
-photorealistic humans. Mouth motion suggests speech rather than audio lip-sync.
+photorealistic humans. Mouth motion follows a saved per-frame audio-volume
+envelope, not phoneme-level lip-sync. Opening and closing captions stay silent.
 The tutorial videos and their default render commands are unchanged.
+
+### Regenerating the cafe voices with Azure
+
+The four approved WAV clips and generated `src\conversation\narration.ts` are
+included so Studio, npx viewers and renders need **no Azure credentials or calls**.
+To regenerate narration, configure the ignored local `.env`:
+
+```dotenv
+SPEECH_KEY=your-speech-resource-key
+SPEECH_REGION=your-resource-region
+SPEECH_VOICE_MILO=en-US-GuyNeural
+SPEECH_VOICE_JUNE=en-US-JennyNeural
+# Optional explicit HTTPS Azure Speech endpoint (otherwise derived from region):
+# SPEECH_ENDPOINT=https://your-resource.cognitiveservices.azure.com/
+```
+
+```powershell
+npm run audio:conversation
+npm run verify:conversation
+npm run render:conversation
+```
+
+Generation uses Azure Speech's HTTPS REST API and Node's built-in environment
+loader; no new dependency is needed. Existing process environment variables take
+precedence over `.env`. Only the four dialogue lines and chosen voice settings
+are sent to Azure; credentials never enter the video bundle or generated manifest.
+New synthesis consumes Azure usage. Unchanged text, voice, endpoint and synthesis
+settings reuse content-addressed WAV files under `public\audio\conversation`.
+Failures stop the command explicitly; the manifest is updated only after all
+clips succeed. Do not render changed dialogue until generation succeeds.
+Changing a script or voice may leave older cached clips; only publish the clips
+referenced by the current manifest. Review generated audio before publication.
+The optional `SPEECH_VOICE` setting is not used for this two-character video.
+Stock voices must be available for the configured resource/region. The script
+supports public Azure endpoint domains, not sovereign-cloud endpoint domains.
 
 ## Sprint demo visibility iceberg
 

@@ -11,6 +11,7 @@
     "bin",
     "scripts",
     "src",
+    "public",
     "remotion.config.ts",
     "tsconfig.json",
     "README.md"
@@ -43,6 +44,7 @@
     "verify:oauth": "node scripts/verify-oauth.mjs",
     "render:conversation": "remotion render src/index.ts CafeConversation out/cafe-conversation.mp4",
     "verify:conversation": "node scripts/verify-conversation.mjs",
+    "audio:conversation": "node scripts/generate-conversation-audio.mjs",
     "render:iceberg": "remotion render src/index.ts SprintDemoIceberg out/sprint-demo-iceberg.mp4",
     "still:iceberg": "remotion still src/index.ts SprintDemoIceberg out/sprint-demo-iceberg.png --frame=1785",
     "verify:iceberg": "node scripts/verify-iceberg.mjs",

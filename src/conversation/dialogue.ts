@@ -1,13 +1,20 @@
+import {conversationLines} from './lines';
+import {narration} from './narration';
+
 export const CONVERSATION_FPS = 30;
-export const CONVERSATION_DURATION = 840;
-export const dialogue = [
-  {start: 0, end: 90, speaker: null, text: 'A perfectly ordinary coffee break.', mood: 'intro'},
-  {start: 90, end: 300, speaker: 'Milo', text: 'Why did the scarecrow win an award?', mood: 'setup'},
-  {start: 300, end: 390, speaker: 'June', text: 'Why?', mood: 'question'},
-  {start: 390, end: 570, speaker: 'Milo', text: 'He was outstanding in his field.', mood: 'punchline'},
-  {start: 570, end: 750, speaker: 'June', text: 'That joke needs to be put out to pasture.', mood: 'deadpan'},
-  {start: 750, end: 840, speaker: null, text: 'Good coffee. Questionable jokes.', mood: 'laugh'},
-] as const;
+let cursor = 0;
+export const dialogue = conversationLines.map((line, index) => {
+  const clip = narration[index];
+  if (line.speaker && (!clip || clip.text !== line.text)) {
+    throw new Error('Conversation narration is stale. Run npm run audio:conversation before previewing or rendering.');
+  }
+  const start = cursor;
+  const audioStart = start + 12;
+  const audioEnd = audioStart + Math.ceil((clip?.seconds ?? 0) * CONVERSATION_FPS);
+  cursor += clip ? audioEnd - start + (line.mood === 'punchline' ? 42 : 27) : 75;
+  return {...line, start, end: cursor, clip, audioStart, audioEnd};
+});
+export const CONVERSATION_DURATION = cursor;
 
 export const getDialogue = (frame: number) =>
   dialogue.find((beat) => frame >= beat.start && frame < beat.end) ?? dialogue[dialogue.length - 1];
