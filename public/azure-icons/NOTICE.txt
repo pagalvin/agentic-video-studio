@@ -1,0 +1,12 @@
+Microsoft Azure architecture icons, official V24 collection.
+Source: https://learn.microsoft.com/en-us/azure/architecture/icons/
+Download: https://arch-center.azureedge.net/icons/Azure_Public_Service_Icons_V24.zip
+Retrieved October 15, 2026. Selected SVG files are unmodified.
+
+Microsoft permits the use of these icons in architectural diagrams, training
+materials, or documentation. You can copy, distribute, and display the icons only
+for the permitted use unless granted explicit permission by Microsoft.
+Microsoft reserves all other rights.
+
+Icons here illustrate Azure services in the accompanying architecture video.
+They do not represent ownership of, or endorsement of, this project by Microsoft.

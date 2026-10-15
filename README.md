@@ -365,6 +365,33 @@ also retains the existing `audio:conversation` command; Dragon voice variants om
 the unsupported speaking-rate wrapper. Review voice quality and pronunciation
 before release.
 
+### Azure fee architecture
+
+Select **AzureFeeArchitecture** for a separate 100-second silent resource-map
+video. The stable diagram highlights logical sign-in/intake, rules, task-hub
+checkpoints, deterministic engines, QC cases, bounded AI explanation, approvals,
+posting responses, identity/secrets, telemetry and a separate deployment path.
+Commands, artifacts, responses and support links use distinct labeled colors;
+moving packets are driven by the current frame.
+
+```powershell
+npm run render:azure-fees # out\azure-fee-architecture.mp4
+npm run verify:azure-fees
+```
+
+Official Microsoft Azure SVG icons are used unmodified with adjacent resource
+names. Source and permitted-use terms are in `public\azure-icons\NOTICE.txt`.
+People and Entra sign-in are labeled logical nodes, not substitute product icons.
+This is based on the supplied briefing, not deployed-environment verification,
+network segmentation, private-endpoint topology or an implementation guide.
+The Durable Functions runtime is shown within the orchestration service; exact
+Container Apps hosting compatibility/configuration must be verified separately.
+The task hub is dedicated orchestration backing, distinct from Cosmos business
+workflow records and Blob artifacts. The AI node denotes the selected explanation
+capability, not two independently called services. Deployment and telemetry paths
+are illustrative and do not prescribe diagnostic settings. No narration or Azure
+API calls occur. Prior videos remain intact.
+
 ## Windows setup
 
 Install Node.js **22.12.0 or newer** (Node 24 LTS recommended) and Git. Open PowerShell

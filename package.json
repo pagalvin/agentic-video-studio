@@ -55,6 +55,8 @@
     "audio:fees": "node scripts/generate-conversation-audio.mjs --fees",
     "render:fees:narrated": "remotion render src/index.ts FeeOperationsNarrated out/fee-operations-narrated.mp4",
     "verify:fees": "node scripts/verify-fees.mjs",
+    "render:azure-fees": "remotion render src/index.ts AzureFeeArchitecture out/azure-fee-architecture.mp4",
+    "verify:azure-fees": "node scripts/verify-azure-fees.mjs",
     "browser:install": "puppeteer browsers install chrome",
     "browser:check": "node scripts/browser-check.mjs"
   },
