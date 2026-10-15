@@ -46,6 +46,9 @@
     "render:iceberg": "remotion render src/index.ts SprintDemoIceberg out/sprint-demo-iceberg.mp4",
     "still:iceberg": "remotion still src/index.ts SprintDemoIceberg out/sprint-demo-iceberg.png --frame=1785",
     "verify:iceberg": "node scripts/verify-iceberg.mjs",
+    "render:batch": "remotion render src/index.ts BatchProcessing out/batch-processing.mp4",
+    "still:batch": "remotion still src/index.ts BatchProcessing out/batch-processing.png --frame=1912",
+    "verify:batch": "node scripts/verify-batch.mjs",
     "browser:install": "puppeteer browsers install chrome",
     "browser:check": "node scripts/browser-check.mjs"
   },

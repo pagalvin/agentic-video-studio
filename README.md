@@ -237,6 +237,42 @@ Existing compositions and their default render commands remain unchanged.
 The verification script uses the bundled Windows FFmpeg, or `ffmpeg` on PATH on
 other platforms, to compare cropped diagram images independently of the progress bar.
 
+## Generic batch processing
+
+Select **BatchProcessing** for a 90-second silent animated architecture diagram
+and Batch Console. Two separate example batches run on the same platform:
+**extract text / classify document type**, then **extract text / transform to
+JSON / validate / post to a Business API**. File Storage preserves originals and
+outputs; the Batch Database tracks the master, per-file and per-step records;
+queue messages carry references, not document contents.
+
+Three workers illustrate bounded parallel processing. The console tracks a
+six-file example with consistent queued, processing, succeeded and failed counts.
+A temporary HTTP 503 produces **Completed with errors** while other files finish.
+An operator-triggered delivery retry reuses validated JSON, retains the other
+successful results, and records an acknowledgement. Stable idempotency keys
+require matching support from the receiving API; an acknowledgement does not
+imply downstream business completion.
+
+```powershell
+npm run render:batch # Full 1080p MP4: out\batch-processing.mp4
+npm run still:batch  # Delivery exception poster
+npm run verify:batch # States/counts, every beat/boundary, packet motion, repeat frames
+```
+
+Edit the narrative, file list and frame-driven example state in
+`src\batch\story.ts`. This is an illustrative video, **not a functioning batch
+application or a live API integration**. Timings are compressed; not all files
+take equal time in a real system. UI controls depict management affordances,
+not clickable controls in an exported MP4. Metadata edits, original replacements
+and output corrections should remain distinct operations. Cancellation requests
+can stop new work where possible but do not roll back posted data. Invalid JSON
+requires correction/review before delivery; automatic data correction is not
+shown. No new dependencies, network services, audio or external assets are used.
+All earlier videos and default commands remain intact. Verification uses the
+existing TypeScript dependency plus bundled Windows FFmpeg or `ffmpeg` on PATH
+elsewhere.
+
 ## Windows setup
 
 Install Node.js **22.12.0 or newer** (Node 24 LTS recommended) and Git. Open PowerShell

@@ -13,6 +13,8 @@ import {CafeConversation} from './conversation/CafeConversation';
 import {CONVERSATION_DURATION, CONVERSATION_FPS} from './conversation/dialogue';
 import {SprintDemoIceberg} from './iceberg/SprintDemoIceberg';
 import {ICEBERG_DURATION, ICEBERG_FPS} from './iceberg/story';
+import {BatchProcessing} from './batch/BatchProcessing';
+import {BATCH_DURATION, BATCH_FPS} from './batch/story';
 
 export const VideoRoot = () => (
   <>
@@ -69,6 +71,14 @@ export const VideoRoot = () => (
       component={SprintDemoIceberg}
       durationInFrames={ICEBERG_DURATION}
       fps={ICEBERG_FPS}
+      width={1920}
+      height={1080}
+    />
+    <Composition
+      id="BatchProcessing"
+      component={BatchProcessing}
+      durationInFrames={BATCH_DURATION}
+      fps={BATCH_FPS}
       width={1920}
       height={1080}
     />
