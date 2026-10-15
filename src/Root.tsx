@@ -20,6 +20,7 @@ import {FEE_DURATION, FEE_FPS} from './fees/story';
 import {FeeOperationsNarrated, NARRATED_FEE_DURATION} from './fees/FeeOperationsNarrated';
 import {AzureFeeArchitecture} from './azureFees/AzureFeeArchitecture';
 import {AZURE_FEE_DURATION, AZURE_FEE_FPS} from './azureFees/story';
+import {AzureFeeArchitectureNarrated, AZURE_NARRATED_DURATION} from './azureFees/AzureFeeArchitectureNarrated';
 
 export const VideoRoot = () => (
   <>
@@ -105,5 +106,7 @@ export const VideoRoot = () => (
     />
     <Composition id="AzureFeeArchitecture" component={AzureFeeArchitecture}
       durationInFrames={AZURE_FEE_DURATION} fps={AZURE_FEE_FPS} width={1920} height={1080} />
+    <Composition id="AzureFeeArchitectureNarrated" component={AzureFeeArchitectureNarrated}
+      durationInFrames={AZURE_NARRATED_DURATION} fps={AZURE_FEE_FPS} width={1920} height={1080} />
   </>
 );

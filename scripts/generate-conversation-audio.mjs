@@ -6,8 +6,9 @@ import path from 'node:path';
 import ts from 'typescript';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
-const fees = process.argv.includes('--fees');
-const kind = fees ? 'fees' : 'conversation';
+const azureFees = process.argv.includes('--azure-fees');
+const fees = azureFees || process.argv.includes('--fees');
+const kind = azureFees ? 'azureFees' : fees ? 'fees' : 'conversation';
 try {
   loadEnvFile(path.join(root, '.env'));
 } catch (error) {

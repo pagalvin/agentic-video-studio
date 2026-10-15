@@ -6,6 +6,7 @@ import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {bundle} from '@remotion/bundler';
 import {renderStill, selectComposition} from '@remotion/renderer';
+import ts from 'typescript';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const output = path.join(root, 'out', 'azure-fees-verification');
@@ -37,3 +38,28 @@ const crop = (frame) => {
 };
 assert.notEqual(crop(1350), crop(1365), 'Resource-to-resource packets must move independently of captions/progress');
 console.log(`Verified 100-second Azure resource map, ten beats/boundaries, diagram motion and repeated hash ${hashes.get(1350)}`);
+const source = await readFile(path.join(root, 'src', 'azureFees', 'narration.ts'), 'utf8');
+const compiled = ts.transpileModule(source, {compilerOptions: {module: ts.ModuleKind.ESNext}});
+const {narration} = await import(`data:text/javascript;base64,${Buffer.from(compiled.outputText).toString('base64')}`);
+assert.equal(narration.length, 10);
+let cursor = 0;
+const narratedFrames = [];
+for (const clip of narration) {
+  const duration = 42 + Math.ceil(clip.seconds * 30);
+  const audio = await readFile(path.join(root, 'public', clip.file));
+  assert.equal(audio.toString('ascii', 0, 4), 'RIFF');
+  assert.ok(clip.seconds > 0);
+  narratedFrames.push(cursor, cursor + Math.floor(duration / 2), cursor + duration - 1);
+  cursor += duration;
+}
+const voiced = await selectComposition({serveUrl, id: 'AzureFeeArchitectureNarrated', chromiumOptions});
+assert.equal(voiced.durationInFrames, cursor);
+for (const frame of [...narratedFrames, narratedFrames[1]]) {
+  const destination = path.join(output, `narrated-${frame}.png`);
+  await renderStill({serveUrl, composition: voiced, chromiumOptions, frame, output: destination, imageFormat: 'png', scale: 0.5});
+  const digest = hash(await readFile(destination));
+  const key = `voiced-${frame}`;
+  if (hashes.has(key)) assert.equal(hashes.get(key), digest);
+  hashes.set(key, digest);
+}
+console.log(`Verified ten narrated scenes, audio assets, boundaries and repeated frame: ${cursor} frames / ${(cursor / 30).toFixed(2)} seconds.`);

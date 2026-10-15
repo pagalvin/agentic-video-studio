@@ -49,13 +49,14 @@ const routes: Record<string, {d: string; kind: 'command' | 'artifact' | 'respons
   images: {d: 'M890 750 H1040 V320 H980 V360', kind: 'support'},
 };
 const colors = {command: '#62dce8', artifact: '#bba3ff', response: '#8ce8af', support: '#efca86'};
-export const AzureFeeArchitecture = () => {
+export const AzureFeeArchitecture = ({scene, subtitle}: {scene?: {beat: number; local: number; duration: number}; subtitle?: string} = {}) => {
   const frame = useCurrentFrame();
-  const beat = Math.min(Math.floor(frame / AZURE_FEE_BEAT), azureFeeBeats.length - 1);
-  const local = frame % AZURE_FEE_BEAT;
+  const beat = scene?.beat ?? Math.min(Math.floor(frame / AZURE_FEE_BEAT), azureFeeBeats.length - 1);
+  const local = scene?.local ?? frame % AZURE_FEE_BEAT;
+  const duration = scene?.duration ?? AZURE_FEE_BEAT;
   const content = azureFeeBeats[beat];
   const active: readonly string[] = content.routes;
-  const opacity = interpolate(local, [0, 12, 284, 299], [0, 1, 1, 0], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
+  const opacity = interpolate(local, [0, 12, duration - 16, duration - 1], [0, 1, 1, 0], {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'});
   return <AbsoluteFill style={{background: '#091725', color: '#edf8ff', fontFamily: 'Arial, sans-serif'}}>
     <div style={{position: 'absolute', left: 60, top: 32, right: 60, display: 'flex', justifyContent: 'space-between', color: '#75ddeb', fontSize: 18, letterSpacing: 3}}><span>{content.phase}</span><span>FEE PLATFORM / AZURE RESOURCE MAP</span></div>
     <div style={{position: 'absolute', left: 60, top: 82, fontSize: 46, fontWeight: 800, opacity}}>{content.title}</div>
@@ -82,14 +83,14 @@ export const AzureFeeArchitecture = () => {
     </div>)}
     <div style={{position: 'absolute', left: 1505, right: 40, top: 235, padding: 20, borderRadius: 15, background: '#173147', border: '1px solid #486e85'}}>
       <div style={{color: '#77deeb', fontSize: 17, letterSpacing: 2}}>WHAT MOVES</div>
-      <div style={{fontSize: 23, lineHeight: 1.5, marginTop: 20, opacity}}>{content.payload}</div>
+      {!scene && <div style={{fontSize: 23, lineHeight: 1.5, marginTop: 20, opacity}}>{content.payload}</div>}
       <div style={{marginTop: 25, fontSize: 18, lineHeight: 1.8}}>{Object.entries(colors).map(([kind, color]) => <div key={kind} style={{color}}>{kind === 'artifact' ? '▣ Artifact / payload' : kind === 'response' ? '● Response / result' : kind === 'support' ? '┄ Support / deployment' : '● Command / request'}</div>)}</div>
     </div>
     <div style={{position: 'absolute', left: 80, top: 840, display: 'flex', gap: 20}}>
       {[[icons.vault, 'Key Vault'], [icons.insights, 'App Insights'], [icons.logs, 'Log Analytics'], [icons.devops, 'Azure DevOps'], [icons.registry, 'Container Registry'], [icons.identity, 'Managed identity']].map(([icon, label]) => <div key={label} style={{display: 'flex', alignItems: 'center', gap: 8, background: '#152f43', padding: 10, borderRadius: 8, fontSize: 17}}><Img src={staticFile(`azure-icons/${icon}`)} style={{width: 27, height: 27, objectFit: 'contain'}} />{label}</div>)}
     </div>
-    <div style={{position: 'absolute', left: 60, right: 60, top: 935, fontSize: 27, lineHeight: 1.4, opacity}}>{content.caption}</div>
+    <div style={{position: 'absolute', left: 60, right: 60, top: 935, fontSize: 27, lineHeight: 1.4, opacity}}>{subtitle ?? content.caption}</div>
     <div style={{position: 'absolute', bottom: 25, left: 60, right: 60, display: 'flex', justifyContent: 'space-between', color: '#8daec3', fontSize: 16, letterSpacing: 2}}><span>LOGICAL FLOWS / NOT A NETWORK SECURITY OR DEPLOYMENT TOPOLOGY</span><span>{beat + 1} / 10</span></div>
-    <div style={{position: 'absolute', bottom: 0, height: 4, background: '#75ddeb', width: `${frame / (AZURE_FEE_DURATION - 1) * 100}%`}} />
+    <div style={{position: 'absolute', bottom: 0, height: 4, background: '#75ddeb', width: `${(scene ? (beat + local / duration) / azureFeeBeats.length : frame / (AZURE_FEE_DURATION - 1)) * 100}%`}} />
   </AbsoluteFill>;
 };

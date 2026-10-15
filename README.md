@@ -392,6 +392,24 @@ capability, not two independently called services. Deployment and telemetry path
 are illustrative and do not prescribe diagnostic settings. No narration or Azure
 API calls occur. Prior videos remain intact.
 
+The separate **AzureFeeArchitectureNarrated** composition adds the configured
+`SPEECH_VOICE` narrator without replacing the silent architecture map.
+Its ten scene recordings determine scene lengths, with short entrance and ending
+pauses. Sentence captions use estimated word-weighted timing, not exact word
+alignment. The payload paragraph is hidden in this version to reduce competing
+reading; the resource labels and flow legend stay visible.
+
+```powershell
+npm run audio:azure-fees # Explicit Azure synthesis; unchanged clips reuse cache
+npm run verify:azure-fees # Silent and narrated scenes, assets and repeat frames
+npm run render:azure-fees:narrated # out\azure-fee-architecture-narrated.mp4
+```
+
+The script is `src\azureFees\script.ts`; approved recordings and generated timing
+metadata are bundled. Previews and renders make no Azure calls and need no keys.
+Only explicit generation uses local credentials and incurs Speech usage.
+All caveats about the logical resource map and unverified deployment still apply.
+
 ## Windows setup
 
 Install Node.js **22.12.0 or newer** (Node 24 LTS recommended) and Git. Open PowerShell
