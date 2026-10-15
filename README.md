@@ -410,6 +410,28 @@ metadata are bundled. Previews and renders make no Azure calls and need no keys.
 Only explicit generation uses local credentials and incurs Speech usage.
 All caveats about the logical resource map and unverified deployment still apply.
 
+## iAssist business video (narrated)
+
+`IAssist` is a 2:28, ten-scene business explainer based on the iAssist customer
+introduction: partners ask, iAssist researches, people decide. A fictional invoice
+question flows through intent reading, approved research, an evidence-backed draft,
+one approval task (iApprove, Teams or email) and the approve / approve with changes /
+deny outcomes. It closes with illustrative economics and a pilot. The ROI figures
+(100 inquiries × 12 min ÷ 60 = 20 h; $45/h = $900/month) are labor-capacity
+illustrations, not verified savings, net ROI or headcount reduction. No real payment
+facts are shown.
+
+```powershell
+npm run studio                # choose IAssist
+npm run verify:iassist        # assets, scene boundaries and deterministic seeking
+npm run render:iassist        # out\iassist-business-video.mp4
+npm run audio:iassist         # Optional: regenerate with Azure Speech (SPEECH_VOICE)
+```
+
+The script is `src\iassist\script.ts`. Approved recordings and timing metadata are
+committed, so previews and renders need no Azure credentials. Captions are sentence
+level with word-weighted timing.
+
 ## Windows setup
 
 Install Node.js **22.12.0 or newer** (Node 24 LTS recommended) and Git. Open PowerShell

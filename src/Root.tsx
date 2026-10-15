@@ -21,6 +21,7 @@ import {FeeOperationsNarrated, NARRATED_FEE_DURATION} from './fees/FeeOperations
 import {AzureFeeArchitecture} from './azureFees/AzureFeeArchitecture';
 import {AZURE_FEE_DURATION, AZURE_FEE_FPS} from './azureFees/story';
 import {AzureFeeArchitectureNarrated, AZURE_NARRATED_DURATION} from './azureFees/AzureFeeArchitectureNarrated';
+import {IAssist, IASSIST_DURATION, IASSIST_FPS} from './iassist/IAssist';
 
 export const VideoRoot = () => (
   <>
@@ -108,5 +109,7 @@ export const VideoRoot = () => (
       durationInFrames={AZURE_FEE_DURATION} fps={AZURE_FEE_FPS} width={1920} height={1080} />
     <Composition id="AzureFeeArchitectureNarrated" component={AzureFeeArchitectureNarrated}
       durationInFrames={AZURE_NARRATED_DURATION} fps={AZURE_FEE_FPS} width={1920} height={1080} />
+    <Composition id="IAssist" component={IAssist}
+      durationInFrames={IASSIST_DURATION} fps={IASSIST_FPS} width={1920} height={1080} />
   </>
 );
