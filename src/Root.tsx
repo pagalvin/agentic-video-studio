@@ -9,6 +9,8 @@ import {RagFlow} from './rag/RagFlow';
 import {RAG_DURATION, RAG_FPS} from './rag/story';
 import {OAuthFlows} from './oauth/OAuthFlows';
 import {OAUTH_DURATION, OAUTH_FPS} from './oauth/story';
+import {CafeConversation} from './conversation/CafeConversation';
+import {CONVERSATION_DURATION, CONVERSATION_FPS} from './conversation/dialogue';
 
 export const VideoRoot = () => (
   <>
@@ -49,6 +51,14 @@ export const VideoRoot = () => (
       component={OAuthFlows}
       durationInFrames={OAUTH_DURATION}
       fps={OAUTH_FPS}
+      width={1920}
+      height={1080}
+    />
+    <Composition
+      id="CafeConversation"
+      component={CafeConversation}
+      durationInFrames={CONVERSATION_DURATION}
+      fps={CONVERSATION_FPS}
       width={1920}
       height={1080}
     />

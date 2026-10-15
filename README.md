@@ -189,6 +189,25 @@ handoffs, actual PKCE packet movement and repeat-frame determinism. The full
 successfully. All four earlier compositions retain their original verification
 frame hashes.
 
+## Cafe conversation
+
+Select **CafeConversation** for a silent 28-second cartoon coffee break between
+Milo and June. Two procedural 3D characters exchange a scarecrow joke across a
+table using animated speech bubbles. The speaker gestures and makes restrained
+mouth/head movements; the listener looks toward the speaker, raises eyebrows,
+reacts with widened or half-lidded eyes, then smiles at the ending. Deterministic
+blinks, head tilts and amused shoulder movement keep both characters alive.
+
+```powershell
+npm run render:conversation # Full 1080p MP4: out\cafe-conversation.mp4
+npm run verify:conversation # Dialogue boundaries, gesture movement, repeat-frame checks
+```
+
+Dialogue, speakers and beat timing live in `src\conversation\dialogue.ts`.
+The scene uses stylized procedural geometry, not downloaded rigged models or
+photorealistic humans. Mouth motion suggests speech rather than audio lip-sync.
+The tutorial videos and their default render commands are unchanged.
+
 ## Windows setup
 
 Install Node.js **22.12.0 or newer** (Node 24 LTS recommended) and Git. Open PowerShell
