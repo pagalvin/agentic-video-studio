@@ -41,6 +41,8 @@
     "render:oauth:sample": "remotion render src/index.ts OAuthFlows out/oauth-flows-sample.mp4 --frames=1530-1589 --scale=0.5 --concurrency=1",
     "still:oauth": "remotion still src/index.ts OAuthFlows out/oauth-flows.png --frame=3525",
     "verify:oauth": "node scripts/verify-oauth.mjs",
+    "render:conversation": "remotion render src/index.ts CafeConversation out/cafe-conversation.mp4",
+    "verify:conversation": "node scripts/verify-conversation.mjs",
     "browser:install": "puppeteer browsers install chrome",
     "browser:check": "node scripts/browser-check.mjs"
   },
