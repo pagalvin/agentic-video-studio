@@ -310,6 +310,106 @@ All earlier videos and default commands remain intact. Verification uses the
 existing TypeScript dependency plus bundled Windows FFmpeg or `ffmpeg` on PATH
 elsewhere.
 
+## Fee operations business process
+
+Select **FeeOperations** for a silent two-minute first-pass business explainer.
+Four role swimlanes follow an operations analyst, automation platform, human
+approver, and accounting/downstream operations through a representative quarterly
+management-fee run. A leadership oversight strip distinguishes monitoring from
+hands-on work, while a persistent case file accumulates linked evidence.
+
+Intake validation returns incomplete inputs; approved terms feed deterministic
+basis, rollforward and fee calculation; QC routes an anomaly to investigation and
+recheck. A bounded AI step drafts an explanation from completed calculation
+evidence, never performs financial arithmetic. A human returns a draft, then
+reviews its revision and approves under release controls. Delivery distinguishes
+packaging, sent/awaiting response and confirmation, with an alternate rejection
+resolution path.
+
+```powershell
+npm run render:fees # out\fee-operations.mp4
+npm run verify:fees # All 12 beats/boundaries, handoffs and deterministic seeking
+```
+
+The story is based on the supplied Fee Automation Platform briefing, not an
+independent audit of that platform or its deployment. No financial amounts,
+formulas, measured speed improvements or new approval policies are invented.
+Azure is a supporting foundation rather than a service-by-service architecture
+claim. Intended outcomes are faster processing, consistent approved rules,
+controlled exceptions and traceable results. Edit text and ownership in
+`src\fees\story.ts`. No audio, Azure calls or external assets are used. Existing
+videos remain separate.
+
+### Narrated fee operations
+
+Select **FeeOperationsNarrated** for the same story with a single Azure narrator
+and sentence-level captions. The original **FeeOperations** stays silent.
+The 12-scene script is in `src\fees\script.ts`; scene lengths follow the measured
+recordings with entrance and reading pauses. Captions advance at estimated
+sentence boundaries based on word counts, not speech-recognition word alignment.
+Secondary explanatory text is hidden in the narrated version to reduce competing
+reading. The full script remains available in source.
+
+```powershell
+npm run audio:fees          # Explicit Azure generation, using SPEECH_VOICE
+npm run verify:fees         # Silent and narrated beats, boundaries and assets
+npm run render:fees:narrated # out\fee-operations-narrated.mp4
+```
+
+Approved audio and timing metadata are bundled for credential-free previews and
+renders. Generation uses the existing ignored `.env`, caches each scene, stops on
+errors and checks for stale script text. Azure receives the narration text and
+selected voice; generation consumes Speech quota. Requests are spaced for the
+free-tier rate limit. No Azure calls occur during rendering. The shared generator
+also retains the existing `audio:conversation` command; Dragon voice variants omit
+the unsupported speaking-rate wrapper. Review voice quality and pronunciation
+before release.
+
+### Azure fee architecture
+
+Select **AzureFeeArchitecture** for a separate 100-second silent resource-map
+video. The stable diagram highlights logical sign-in/intake, rules, task-hub
+checkpoints, deterministic engines, QC cases, bounded AI explanation, approvals,
+posting responses, identity/secrets, telemetry and a separate deployment path.
+Commands, artifacts, responses and support links use distinct labeled colors;
+moving packets are driven by the current frame.
+
+```powershell
+npm run render:azure-fees # out\azure-fee-architecture.mp4
+npm run verify:azure-fees
+```
+
+Official Microsoft Azure SVG icons are used unmodified with adjacent resource
+names. Source and permitted-use terms are in `public\azure-icons\NOTICE.txt`.
+People and Entra sign-in are labeled logical nodes, not substitute product icons.
+This is based on the supplied briefing, not deployed-environment verification,
+network segmentation, private-endpoint topology or an implementation guide.
+The Durable Functions runtime is shown within the orchestration service; exact
+Container Apps hosting compatibility/configuration must be verified separately.
+The task hub is dedicated orchestration backing, distinct from Cosmos business
+workflow records and Blob artifacts. The AI node denotes the selected explanation
+capability, not two independently called services. Deployment and telemetry paths
+are illustrative and do not prescribe diagnostic settings. No narration or Azure
+API calls occur. Prior videos remain intact.
+
+The separate **AzureFeeArchitectureNarrated** composition adds the configured
+`SPEECH_VOICE` narrator without replacing the silent architecture map.
+Its ten scene recordings determine scene lengths, with short entrance and ending
+pauses. Sentence captions use estimated word-weighted timing, not exact word
+alignment. The payload paragraph is hidden in this version to reduce competing
+reading; the resource labels and flow legend stay visible.
+
+```powershell
+npm run audio:azure-fees # Explicit Azure synthesis; unchanged clips reuse cache
+npm run verify:azure-fees # Silent and narrated scenes, assets and repeat frames
+npm run render:azure-fees:narrated # out\azure-fee-architecture-narrated.mp4
+```
+
+The script is `src\azureFees\script.ts`; approved recordings and generated timing
+metadata are bundled. Previews and renders make no Azure calls and need no keys.
+Only explicit generation uses local credentials and incurs Speech usage.
+All caveats about the logical resource map and unverified deployment still apply.
+
 ## Windows setup
 
 Install Node.js **22.12.0 or newer** (Node 24 LTS recommended) and Git. Open PowerShell

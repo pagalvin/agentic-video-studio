@@ -15,6 +15,12 @@ import {SprintDemoIceberg} from './iceberg/SprintDemoIceberg';
 import {ICEBERG_DURATION, ICEBERG_FPS} from './iceberg/story';
 import {BatchProcessing} from './batch/BatchProcessing';
 import {BATCH_DURATION, BATCH_FPS} from './batch/story';
+import {FeeOperations} from './fees/FeeOperations';
+import {FEE_DURATION, FEE_FPS} from './fees/story';
+import {FeeOperationsNarrated, NARRATED_FEE_DURATION} from './fees/FeeOperationsNarrated';
+import {AzureFeeArchitecture} from './azureFees/AzureFeeArchitecture';
+import {AZURE_FEE_DURATION, AZURE_FEE_FPS} from './azureFees/story';
+import {AzureFeeArchitectureNarrated, AZURE_NARRATED_DURATION} from './azureFees/AzureFeeArchitectureNarrated';
 
 export const VideoRoot = () => (
   <>
@@ -82,5 +88,25 @@ export const VideoRoot = () => (
       width={1920}
       height={1080}
     />
+    <Composition
+      id="FeeOperations"
+      component={FeeOperations}
+      durationInFrames={FEE_DURATION}
+      fps={FEE_FPS}
+      width={1920}
+      height={1080}
+    />
+    <Composition
+      id="FeeOperationsNarrated"
+      component={FeeOperationsNarrated}
+      durationInFrames={NARRATED_FEE_DURATION}
+      fps={FEE_FPS}
+      width={1920}
+      height={1080}
+    />
+    <Composition id="AzureFeeArchitecture" component={AzureFeeArchitecture}
+      durationInFrames={AZURE_FEE_DURATION} fps={AZURE_FEE_FPS} width={1920} height={1080} />
+    <Composition id="AzureFeeArchitectureNarrated" component={AzureFeeArchitectureNarrated}
+      durationInFrames={AZURE_NARRATED_DURATION} fps={AZURE_FEE_FPS} width={1920} height={1080} />
   </>
 );
