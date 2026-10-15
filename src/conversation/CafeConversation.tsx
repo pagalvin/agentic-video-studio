@@ -1,6 +1,6 @@
-import {AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig} from 'remotion';
+import {AbsoluteFill, Audio, Sequence, staticFile, interpolate, spring, useCurrentFrame, useVideoConfig} from 'remotion';
 import {CafeScene} from './CafeScene';
-import {CONVERSATION_DURATION, getDialogue} from './dialogue';
+import {CONVERSATION_DURATION, dialogue, getDialogue} from './dialogue';
 
 const clamp = {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'} as const;
 export const CafeConversation = () => {
@@ -15,6 +15,11 @@ export const CafeConversation = () => {
   return (
     <AbsoluteFill style={{background: '#e5d6bb', fontFamily: 'Arial, sans-serif', color: '#273e3b'}}>
       <CafeScene />
+      {dialogue.map((line) => line.clip && (
+        <Sequence key={line.start} from={line.audioStart} durationInFrames={line.audioEnd - line.audioStart} layout="none">
+          <Audio src={staticFile(line.clip.file)} />
+        </Sequence>
+      ))}
       <div style={{position: 'absolute', top: 40, left: 70, right: 70, display: 'flex', justifyContent: 'space-between', fontSize: 22, letterSpacing: 4}}>
         <span>THE COFFEE BREAK</span><span>A SMALL CONVERSATION</span>
       </div>

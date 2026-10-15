@@ -20,7 +20,7 @@ const Character = ({name, x}: {name: 'Milo' | 'June'; x: number}) => {
   const frame = useCurrentFrame();
   const beat = getDialogue(frame);
   const local = frame - beat.start;
-  const speaking = beat.speaker === name;
+  const speaking = beat.speaker === name && frame >= beat.audioStart && frame < beat.audioEnd;
   const direction = name === 'Milo' ? 1 : -1;
   const reaction = interpolate(local, [0, 25, 55], [0, 0, 1], clamp);
   const deadpan = name === 'June' && beat.mood === 'deadpan';
@@ -32,8 +32,8 @@ const Character = ({name, x}: {name: 'Milo' | 'June'; x: number}) => {
   const eyeHeight = (deadpan ? 0.055 : surprised ? 0.14 : 0.1) * blink;
   const skin = name === 'Milo' ? '#dca27b' : '#a9694e';
   const shirt = name === 'Milo' ? '#52a9a2' : '#dc9471';
-  const mouthOpen = speaking && local < beat.end - beat.start - 18
-    ? Math.max(0, Math.sin(local / 4)) * 0.038 : laughing ? 0.045 : 0;
+  const energy = beat.clip?.envelope[frame - beat.audioStart] ?? 0;
+  const mouthOpen = speaking ? energy * 0.065 : laughing ? 0.025 : 0;
   const lean = speaking ? Math.sin(local / 12) * 0.018 : Math.sin(frame / 45) * 0.01;
 
   return (
@@ -59,7 +59,17 @@ const Character = ({name, x}: {name: 'Milo' | 'June'; x: number}) => {
           <Ball position={[-0.57, 0, 0]} scale={[0.11, 0.17, 0.1]} color={skin} />
           <Ball position={[0.57, 0, 0]} scale={[0.11, 0.17, 0.1]} color={skin} />
           <Ball position={[0, 0.35, -0.12]} scale={[0.6, 0.42, 0.48]} color={name === 'Milo' ? '#573c2c' : '#252b35'} />
-          {name === 'June' && <Ball position={[0.38, 0.13, -0.42]} scale={[0.28, 0.4, 0.24]} color="#252b35" />}
+          {name === 'June' && (
+            <group>
+              <Ball position={[0, -0.16, -0.36]} scale={[0.65, 0.89, 0.32]} color="#252b35" />
+              {[-1, 1].map((side) => (
+                <group key={side}>
+                  <Ball position={[side * 0.55, -0.18, -0.02]} scale={[0.2, 0.79, 0.28]} color="#252b35" />
+                  <Stroke points={[[side * 0.6, 0.22, 0.1], [side * 0.65, -0.3, 0.13], [side * 0.56, -0.8, 0.12]]} radius={0.018} color="#424958" />
+                </group>
+              ))}
+            </group>
+          )}
           {[-1, 1].map((side) => (
             <group key={side}>
               <Ball position={[side * 0.21, 0.08, 0.47]} scale={[0.13, eyeHeight, 0.055]} color="#fff3df" />
