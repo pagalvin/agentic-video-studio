@@ -310,6 +310,36 @@ All earlier videos and default commands remain intact. Verification uses the
 existing TypeScript dependency plus bundled Windows FFmpeg or `ffmpeg` on PATH
 elsewhere.
 
+## Fee operations business process
+
+Select **FeeOperations** for a silent two-minute first-pass business explainer.
+Four role swimlanes follow an operations analyst, automation platform, human
+approver, and accounting/downstream operations through a representative quarterly
+management-fee run. A leadership oversight strip distinguishes monitoring from
+hands-on work, while a persistent case file accumulates linked evidence.
+
+Intake validation returns incomplete inputs; approved terms feed deterministic
+basis, rollforward and fee calculation; QC routes an anomaly to investigation and
+recheck. A bounded AI step drafts an explanation from completed calculation
+evidence, never performs financial arithmetic. A human returns a draft, then
+reviews its revision and approves under release controls. Delivery distinguishes
+packaging, sent/awaiting response and confirmation, with an alternate rejection
+resolution path.
+
+```powershell
+npm run render:fees # out\fee-operations.mp4
+npm run verify:fees # All 12 beats/boundaries, handoffs and deterministic seeking
+```
+
+The story is based on the supplied Fee Automation Platform briefing, not an
+independent audit of that platform or its deployment. No financial amounts,
+formulas, measured speed improvements or new approval policies are invented.
+Azure is a supporting foundation rather than a service-by-service architecture
+claim. Intended outcomes are faster processing, consistent approved rules,
+controlled exceptions and traceable results. Edit text and ownership in
+`src\fees\story.ts`. No audio, Azure calls or external assets are used. Existing
+videos remain separate.
+
 ## Windows setup
 
 Install Node.js **22.12.0 or newer** (Node 24 LTS recommended) and Git. Open PowerShell

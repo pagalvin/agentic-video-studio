@@ -15,6 +15,8 @@ import {SprintDemoIceberg} from './iceberg/SprintDemoIceberg';
 import {ICEBERG_DURATION, ICEBERG_FPS} from './iceberg/story';
 import {BatchProcessing} from './batch/BatchProcessing';
 import {BATCH_DURATION, BATCH_FPS} from './batch/story';
+import {FeeOperations} from './fees/FeeOperations';
+import {FEE_DURATION, FEE_FPS} from './fees/story';
 
 export const VideoRoot = () => (
   <>
@@ -79,6 +81,14 @@ export const VideoRoot = () => (
       component={BatchProcessing}
       durationInFrames={BATCH_DURATION}
       fps={BATCH_FPS}
+      width={1920}
+      height={1080}
+    />
+    <Composition
+      id="FeeOperations"
+      component={FeeOperations}
+      durationInFrames={FEE_DURATION}
+      fps={FEE_FPS}
       width={1920}
       height={1080}
     />
